@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td colspan="4">
+          <input type="text" id="inputBox" value="0"/> 
+        </td>
+      </tr>
+      <tr<tr>
+  <td class="digitBottom" onclick="digitBtnPressed(7)">7</td>
+  <td class="digitBottom" onclick="digitBtnPressed(8)">8</td>
+  <td class="digitBottom" onclick="digitBtnPressed(9)">9</td>
+  <td class="operatorButton" onclick="operatorBtnPressed('*')">*</td>
+</tr>
+<tr>
+  <td class="digitBottom" onclick="digitBtnPressed(4)">4</td>
+  <td class="digitBottom" onclick="digitBtnPressed(5)">5</td>
+  <td class="digitBottom" onclick="digitBtnPressed(6)">6</td>
+  <td class="operatorButton" onclick="operatorBtnPressed('-')">-</td>
+</tr>
+<tr>
+  <td class="digitBottom" onclick="digitBtnPressed(1)">1</td>
+  <td class="digitBottom" onclick="digitBtnPressed(2)">2</td>
+  <td class="digitBottom" onclick="digitBtnPressed(3)">3</td>
+  <td class="operatorButton" onclick="operatorBtnPressed('+')">+</td>
+</tr>
+<tr>
+  <td colspan="2" class="digitBottom" onclick="digitBtnPressed(0)">0</td>
+  <td class="AcButton" onclick="btnAcPressed()">AC</td>
+  <td class="operatorButton" onclick="operatorBtnPressed('/')">/</td>
+</tr>
+<tr>
+  <td colspan="4" class="operatorButton" onclick="equalBtnPressed()">=</td>
+</tr>
+  </table>
+    
+    <script>
+      let currentOperator;
+      let value1;
+      let newLine = true;
+
+      function digitBtnPressed(button) {
+        if (newLine) {
+          document.getElementById("inputBox").value = button;
+          newLine = false;
+        } else {
+          let currentValue = document.getElementById("inputBox").value;
+          document.getElementById("inputBox").value = currentValue + button;
+        }
+      }
+
+      function btnAcPressed() {
+        document.getElementById("inputBox").value = 0;
+        newLine = true;
+      }
+
+      function operatorBtnPressed(operator) {
+        currentOperator = operator;
+        value1 = parseInt(document.getElementById("inputBox").value);
+        newLine = true;
+      }
+
+      function equalBtnPressed() {
+        let value2 = parseInt(document.getElementById("inputBox").value);
+        let finalTotal;
+
+        switch (currentOperator) {
+          case '+':
+            finalTotal = value1 + value2;
+            break;
+          case '-':
+            finalTotal = value1 - value2;
+            break;
+          case '*':
+            finalTotal = value1 * value2;
+            break;
+          case '/':
+            finalTotal = value2 !== 0 ? value1 / value2 : "Error";
+            break;
+          default:
+            finalTotal = "Error";
+        }
+
+        document.getElementById("inputBox").value = finalTotal;
+        newLine = true;
+      }
+    </script>
+  </body>
+</html>
